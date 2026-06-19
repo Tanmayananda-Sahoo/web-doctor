@@ -2,17 +2,29 @@ import dns from 'dns/promises';
 async function resolveDns4(url) {
     try {
         const records = await dns.resolve4(url);
-        return records;
+        return {
+            success: true,
+            records
+        };
     } catch (error) {
-        return error.message
+        return {
+            success: false,
+            message: error.message
+        }
     }
 }
 async function resolveDns6(url) {
     try {
         const records = await dns.resolve6(url);
-        return records;
+        return {
+            success: true,
+            records
+        };
     } catch (error) {
-        return error;
+        return {
+            success: false,
+            message: error.message
+        }
     }
 }
 
