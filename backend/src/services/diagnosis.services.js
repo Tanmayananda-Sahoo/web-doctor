@@ -1,4 +1,4 @@
-function generateDiagnosis(record4, record6, portResponse, httpResponse) {
+function generateDiagnosis(record4, record6, portResponse, httpResponse, pingResponse) {
     let diagnosisReport;
     const dnsSuccess = (record4.success || record6.success);
     if (!dnsSuccess) {
@@ -21,6 +21,11 @@ function generateDiagnosis(record4, record6, portResponse, httpResponse) {
             cause: "Server Issue",
             details: "Server responded with a status code 5xx"
         };
+    } else if(portResponse.open && httpResponse.reachable && !pingResponse.reachable) {
+        diagnosisReport = {
+            cause: "ICMP blocked.",
+            details: "Website is reachable but does not respond to ICMP packets. Maybe because of firewalls."
+        }
     } else {
         diagnosisReport = {
             cause: "Healthy",
