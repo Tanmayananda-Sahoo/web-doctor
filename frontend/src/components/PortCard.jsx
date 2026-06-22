@@ -1,11 +1,21 @@
 import React from 'react'
 
-const PortCard = () => {
+const PortCard = ({data}) => {
   return (
     <div className="port-card card">
-        <h4 className="header">
-            Service Availability
-        </h4>
+      <div className="header">
+        <h4>Port connectivity</h4>
+      </div>
+      <div className="small-box-content">
+        <div className="port">
+          <h2 className='basic-header'>Port:</h2>
+          <h1 className='highlight'>{data.port}</h1>
+        </div>
+        <div className="port-status">
+          <h2 className='basic-header'>Status:</h2>
+          <h1 className='highlight'>{data.open}</h1>
+        </div>
+      </div>
     </div>
   )
 }
