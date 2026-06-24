@@ -30,6 +30,14 @@
     background-color: #151414;
 }
 
+.loader-page {
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    background-color: #151414;
+}
+
 .input-page {
     height: 100vh;
     width: 100%;

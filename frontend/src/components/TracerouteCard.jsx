@@ -5,8 +5,9 @@ const TracerouteCard = ({ data }) => {
   if (!data.destinationReached)
     return (
       <div className='trace-card card' style={{ textAlign: 'center' }}>
-        <Loader className='size-10 animate-spin' /><br></br>
+        <Loader className='size-10 animate-spin' /><br></br><br></br>
         <span className='header'><h4>Fetching trace response.</h4></span>
+        <span className='header'><h4>Usually take some time.</h4></span>
       </div>
     );
   return (

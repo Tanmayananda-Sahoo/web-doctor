@@ -6,6 +6,7 @@ import { generateDiagnosis } from "./diagnosis.services.js";
 import { pingTest } from "./ping.services.js";
 import { tlsTest } from './ssl.services.js';
 import { tracertTest } from "./tracert.services.js";
+import { getScore } from "./getScore.services.js";
 
 async function analyze(url) {
     const [
@@ -24,7 +25,10 @@ async function analyze(url) {
         tlsTest(url)
     ]);
     const diagnosis = generateDiagnosis(record4, record6, portResponse, httpResponse, pingResponse);
+    const scoreResponse = getScore(record4, record6, portResponse, httpResponse, pingResponse, tlsResponse);
     return {
+        target: url,
+        scoreResponse,
         IPv4: record4,
         IPv6: record6,
         port: portResponse,

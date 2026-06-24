@@ -3,17 +3,13 @@ import { webStore } from '../services/web.services.js';
 import { useNavigate } from 'react-router-dom';
 
 const InputPage = () => {
-    const { submit } = webStore();
+    const {setData} = webStore();
     const navigate = useNavigate();
     const [url, setUrl] = useState("");
     async function handleClick(e) {
         e.preventDefault();
-        const data = {
-            url,
-        }
+        navigate(`/analytics?url=${encodeURIComponent(url)}`);
         setUrl("");
-        await submit(data);
-        navigate('/analytics');
     }
     return (
         <div className="page">

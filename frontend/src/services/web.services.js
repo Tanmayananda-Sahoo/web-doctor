@@ -6,12 +6,16 @@ const webStore = create((set, get) => ({
     isLoading: false,
     inputData: null,
     submit: async(data) => {
-        set({isLoading: true});
         set({inputData: data});
+        console.log("Requesting...");
         const response = await axios.post('/submit', data);
-        set({isLoading: false});
-        set({analytics: response.data});
-        console.log(get().analytics.result);
+        // set({analytics: response.data});
+        return response;
+    },
+    setData: async(data) => {
+        set({inputData: data});
+        console.log("Setting the data...");
+        console.log("Data: ", get().inputData);
     }
 }))
 

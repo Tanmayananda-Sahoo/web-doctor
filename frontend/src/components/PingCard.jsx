@@ -14,7 +14,7 @@ const PingCard = ({data}) => {
         <div className="reachable">
           <h2 className='basic-header'>Reachable:</h2>
           <h1 className='highlight'>{data.reachable ? <span className='success'>yes</span> : <span className='error'>no</span>}</h1>
-        </div>
+        </div>  
       </div>
     </div>
   )
