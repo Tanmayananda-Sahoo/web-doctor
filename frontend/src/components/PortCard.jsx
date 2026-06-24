@@ -13,7 +13,7 @@ const PortCard = ({data}) => {
         </div>
         <div className="port-status">
           <h2 className='basic-header'>Status:</h2>
-          <h1 className='highlight'>{data.open}</h1>
+          <h1 className='highlight'>{data.open ? <span className="success">open</span> : <span className='error'>closed</span>}</h1>
         </div>
       </div>
     </div>

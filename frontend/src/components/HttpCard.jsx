@@ -9,11 +9,11 @@ const HttpCard = ({data}) => {
       <div className="small-box-content">
         <div className="port">
           <h2 className='basic-header'>Status Code:</h2>
-          <h1 className='highlight'>{data.status}</h1>
+          <h1 className='highlight'>{data.status ? <span className={data.status >= 200 && data.status <=400 ? "success" : "error"}>{data.status}</span> : <span className='error'>{data.reason}</span>}</h1>
         </div>
         <div className="port-status">
           <h2 className='basic-header'>Reachable:</h2>
-          <h1 className='highlight'>{data.reachable}</h1>
+          <h1 className='highlight'>{data.reachable ? <span className="success">yes</span> : <span className='error'>no</span>}</h1>
         </div>
         <div className="response-time">
           <h2 className='basic-header'>Response Time:</h2>

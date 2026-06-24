@@ -9,13 +9,27 @@ import PingCard from '../components/PingCard.jsx'
 import SSLCard from '../components/SSLCard.jsx'
 import TracerouteCard from '../components/TracerouteCard.jsx'
 import { webStore } from '../services/web.services.js'
+import {Loader} from 'lucide-react';
+import axios from '../utils/axios.js';
 
 const DashboardPage = () => {
-  const { analytics, isLoading } = webStore();
-  console.log("analytics: ",analytics);
+  const { analytics, isLoading, inputData } = webStore();
+  const [data, setData] = useState({});
+  async function fetchTrace(inputData) {
+    try {
+      const tracerouteData = await axios.post('/submit/analyze', inputData);
+      setData(tracerouteData.data.traceResponse);
+      console.log("trace: ", data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchTrace(inputData);
+  },[])
   if(isLoading && analytics == null) 
     return(
-    <div data-theme = {themeSelected} className='flex items-center justify-center h-screen'>
+    <div className='flex items-center justify-center h-screen'>
       <Loader className='size-10 animate-spin' />
     </div>
     );
@@ -28,7 +42,7 @@ const DashboardPage = () => {
           <DiagnosticCard data={analytics.result.diagnosis}/>
           <HttpCard data={analytics.result.http}/>
           <DNSCard data={analytics.result}/>
-          <TracerouteCard />
+          <TracerouteCard data={data}/>
           <PingCard data={analytics.result.pingResponse}/>
           <SSLCard data={analytics.result.tlsResponse}/>
           <PortCard data={analytics.result.port}/>
